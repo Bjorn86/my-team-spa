@@ -1,0 +1,22 @@
+# LOGS
+logs
+*.log
+npm-debug.log*
+
+# DEPENDENCY DIRECTORY
+node_modules
+
+# OPTIONAL NPM CACHE DIRECTORY
+.npm
+
+# OPTIONAL REPL HISTORY
+.DS_Store
+.idea
+.vscode
+
+# ENV VARIABLES
+*.env
+
+# OTHER DIRECTORY
+dist
+public

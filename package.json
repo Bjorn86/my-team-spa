@@ -1,0 +1,57 @@
+{
+  "name": "app-webpack-react",
+  "version": "1.0.1",
+  "description": "",
+  "private": "true",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development webpack --mode development",
+    "build": "cross-env NODE_ENV=production webpack --mode production",
+    "start": "cross-env NODE_ENV=development webpack-dev-server --mode development"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bjorn86/app-webpack-react.git"
+  },
+  "author": "Danila Legkobytov <legkobytov-danila@yandex.ru>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Bjorn86/app-webpack-react/issues"
+  },
+  "homepage": "https://github.com/Bjorn86/app-webpack-react#readme",
+  "devDependencies": {
+    "@babel/core": "^7.21.3",
+    "@babel/preset-env": "^7.20.2",
+    "@babel/preset-react": "^7.18.6",
+    "@babel/preset-typescript": "^7.21.0",
+    "babel-loader": "^9.1.2",
+    "clean-webpack-plugin": "^4.0.0",
+    "copy-webpack-plugin": "^11.0.0",
+    "cross-env": "^7.0.3",
+    "css-loader": "^6.7.3",
+    "css-minimizer-webpack-plugin": "^4.2.2",
+    "csv-loader": "^3.0.5",
+    "eslint": "^8.37.0",
+    "eslint-config-react-app": "^7.0.1",
+    "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.7.4",
+    "papaparse": "^5.4.0",
+    "postcss": "^8.4.21",
+    "postcss-loader": "^7.1.0",
+    "postcss-preset-env": "^8.0.1",
+    "prettier": "^2.8.4",
+    "sass": "^1.59.3",
+    "sass-loader": "^13.2.0",
+    "terser-webpack-plugin": "^5.3.7",
+    "typescript": "^5.0.2",
+    "webpack": "^5.76.1",
+    "webpack-cli": "^5.0.1",
+    "webpack-dev-server": "^4.12.0",
+    "xml-loader": "^1.2.1"
+  },
+  "dependencies": {
+    "core-js": "^3.29.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.9.0"
+  }
+}
