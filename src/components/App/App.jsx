@@ -1,4 +1,5 @@
-import React from 'react';
+// IMPORT STYLES
+import './App.scss';
 
 // APP CORE COMPONENT
 function App() {

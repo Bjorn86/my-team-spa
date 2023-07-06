@@ -1,0 +1,9 @@
+@mixin base-text($size, $color) {
+  font: {
+    family: 'Roboto', 'Arial', sans-serif;
+    size: $size;
+    weight: 400;
+  }
+  line-height: normal;
+  color: $color;
+}
