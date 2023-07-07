@@ -1,0 +1,11 @@
+.section-title {
+  margin: 0;
+  @include base-text($textXXXL, $white);
+  line-height: 1;
+}
+
+@media screen and (max-width: 990px) {
+  .section-title {
+    font-size: $textXXL;
+  }
+}

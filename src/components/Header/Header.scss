@@ -1,0 +1,34 @@
+.header {
+  max-width: 100%;
+  background-color: $violet;
+  &__wrapper {
+    max-width: 1440px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    padding: 32px 80px 64px;
+    box-sizing: border-box;
+  }
+  &__text {
+    max-width: 846px;
+    margin-top: 20px;
+    margin-bottom: 0;
+    @include base-text($textL, $white);
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 990px) {
+  .header {
+    &__wrapper {
+      padding-top: 12px;
+      padding-right: 16px;
+      padding-left: 16px;
+    }
+    &__text {
+      font-size: $textM;
+    }
+  }
+}
