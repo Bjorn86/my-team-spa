@@ -1,0 +1,6 @@
+.auth-title {
+  margin-top: 0;
+  margin-bottom: 17px;
+  align-self: flex-start;
+  @include base-text($textL, $black);
+}

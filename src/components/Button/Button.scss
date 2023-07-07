@@ -9,6 +9,16 @@
     border: 1px solid $gray-light;
     background-color: transparent;
   }
+  &_place_form {
+    height: 48px;
+    margin-top: 6px;
+    border: none;
+    background-color: $violet;
+    &:disabled {
+      pointer-events: none;
+      background-color: $gray;
+    }
+  }
 }
 
 @media screen and (max-width: 768px) {
