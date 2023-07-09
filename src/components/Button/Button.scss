@@ -19,6 +19,21 @@
       background-color: $gray;
     }
   }
+  &_place_input {
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    border: none;
+    position: absolute;
+    top: 41px;
+    right: 8px;
+    background: url('../../assets/icons/eye-slash.svg') center center/cover
+        no-repeat,
+      transparent;
+  }
+  &_action_shown-password {
+    background-image: url('../../assets/icons/eye.svg');
+  }
 }
 
 @media screen and (max-width: 768px) {

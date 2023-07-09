@@ -1,30 +1,60 @@
 // IMPORT PACKAGES
-import useFormWithValidation from '../../hooks/useFormWithValidation.jsx';
+import { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import isEmail from 'validator/es/lib/isEmail';
 
 // IMPORT STYLES
 import './Registration.scss';
 
 // IMPORT COMPONENTS
 import AuthScreen from '../AuthScreen/AuthScreen.jsx';
+import Button from '../Button/Button.jsx';
 
 // REGISTRATION COMPONENT
-function Registration({ onLoading }) {
+function Registration({ onRegistration, onLoading }) {
   // HOOKS
-  const { values, errors, isFormValid, onChange } = useFormWithValidation();
+  const [isPasswordShown, setPasswordShown] = useState(false);
+  const [isConfirmPasswordShown, setConfirmPasswordShown] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    watch,
+    trigger,
+    formState: { errors, isValid },
+  } = useForm({ mode: 'all' });
+  const password = watch('password');
 
   // HANDLER SUBMIT
-  function handleSubmit(e) {
-    e.preventDefault();
+  function onSubmit(data) {
+    onRegistration(data);
+    console.log(data);
   }
+
+  // HANDLER PASSWORD SHOWN CLICK
+  function handlePasswordShownClick() {
+    setPasswordShown(!isPasswordShown);
+  }
+
+  // HANDLER CONFIRM PASSWORD SHOWN CLICK
+  function handleConfirmPasswordShownClick() {
+    setConfirmPasswordShown(!isConfirmPasswordShown);
+  }
+
+  // TRACKING PASSWORD COMPLIANCE
+  useEffect(() => {
+    if (password) {
+      trigger('confirmPassword');
+    }
+  }, [password, trigger]);
 
   return (
     <main className='registration'>
       <AuthScreen
         authTitle='Регистрация'
         formName='registration'
-        onSubmit={handleSubmit}
+        onSubmit={handleSubmit(onSubmit)}
         buttonText={onLoading ? 'Регистрация...' : 'Зарегистрироваться'}
-        isFormValid={isFormValid}
+        isFormValid={isValid}
       >
         <label className='form__input-wrapper'>
           Имя
@@ -33,21 +63,26 @@ function Registration({ onLoading }) {
               errors.name && 'form__input_style_error'
             }`}
             type='text'
-            name='name'
             form='registration'
-            required
-            minLength='2'
-            maxLength='30'
             disabled={onLoading ? true : false}
-            onChange={onChange}
-            value={values.name || ''}
+            {...register('name', {
+              required: 'Поле должно быть заполнено',
+              minLength: {
+                value: 2,
+                message: 'Минимальное количество символов: 2',
+              },
+              maxLength: {
+                value: 30,
+                message: 'Максимальное количество символов: 30',
+              },
+            })}
           />
           <span
             className={`form__input-error ${
               errors.name ? 'form__input-error_active' : ''
             }`}
           >
-            {errors.name || ''}
+            {errors.name?.message}
           </span>
         </label>
         <label className='form__input-wrapper'>
@@ -57,67 +92,91 @@ function Registration({ onLoading }) {
               errors.email && 'form__input_style_error'
             }`}
             type='text'
-            name='email'
             form='registration'
-            required
             disabled={onLoading ? true : false}
-            onChange={onChange}
-            value={values.email || ''}
+            {...register('email', {
+              required: 'Поле должно быть заполнено',
+              validate: (value) => {
+                if (!isEmail(value)) {
+                  return 'Необходимо указать e-mail в формате name@domain.zone';
+                }
+              },
+            })}
           />
           <span
             className={`form__input-error ${
               errors.email ? 'form__input-error_active' : ''
             }`}
           >
-            {errors.email || ''}
+            {errors.email?.message}
           </span>
         </label>
-        <label className='form__input-wrapper'>
+        <label className='form__input-wrapper form__input-wrapper_type_password'>
           Пароль
           <input
             className={`form__input ${
               errors.password && 'form__input_style_error'
             }`}
-            type='password'
-            name='password'
+            type={isPasswordShown ? 'text' : 'password'}
             form='registration'
-            required
-            minLength='6'
-            maxLength='20'
             disabled={onLoading ? true : false}
-            onChange={onChange}
-            value={values.password || ''}
+            {...register('password', {
+              required: 'Поле должно быть заполнено',
+              minLength: {
+                value: 6,
+                message: 'Минимальное количество символов: 6',
+              },
+              maxLength: {
+                value: 20,
+                message: 'Максимальное количество символов: 20',
+              },
+            })}
+          />
+          <Button
+            type='button'
+            ariaLabel='Показать пароль'
+            place='input'
+            isShown={isPasswordShown}
+            onClick={handlePasswordShownClick}
           />
           <span
             className={`form__input-error ${
               errors.password ? 'form__input-error_active' : ''
             }`}
           >
-            {errors.password || ''}
+            {errors.password?.message}
           </span>
         </label>
-        <label className='form__input-wrapper'>
+        <label className='form__input-wrapper form__input-wrapper_type_password'>
           Подтвердите пароль
           <input
             className={`form__input ${
-              errors.repeat_password && 'form__input_style_error'
+              errors.confirmPassword && 'form__input_style_error'
             }`}
-            type='password'
-            name='repeat_password'
+            type={isConfirmPasswordShown ? 'text' : 'password'}
             form='registration'
-            required
-            minLength='6'
-            maxLength='20'
             disabled={onLoading ? true : false}
-            onChange={onChange}
-            value={values.repeat_password || ''}
+            {...register('confirmPassword', {
+              validate: (value) => {
+                if (watch('password') !== value) {
+                  return 'Пароли не совпадают';
+                }
+              },
+            })}
+          />
+          <Button
+            type='button'
+            ariaLabel='Показать пароль'
+            place='input'
+            isShown={isConfirmPasswordShown}
+            onClick={handleConfirmPasswordShownClick}
           />
           <span
             className={`form__input-error ${
-              errors.repeat_password ? 'form__input-error_active' : ''
+              errors.confirmPassword ? 'form__input-error_active' : ''
             }`}
           >
-            {errors.repeat_password || ''}
+            {errors.confirmPassword?.message}
           </span>
         </label>
       </AuthScreen>

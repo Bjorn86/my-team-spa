@@ -8,7 +8,7 @@ import Button from '../Button/Button.jsx';
 function Form({ formName, onSubmit, buttonText, isFormValid, ...props }) {
   return (
     <form
-      className={`form form_type_${formName}`} // TODO Посмотреть нужен ли класс с модификатором
+      className='form'
       name={formName}
       id={formName}
       action='#'
@@ -16,7 +16,12 @@ function Form({ formName, onSubmit, buttonText, isFormValid, ...props }) {
       onSubmit={onSubmit}
     >
       {props.children}
-      <Button buttonText={buttonText} place='form' isFormValid={isFormValid} />
+      <Button
+        type='submit'
+        buttonText={buttonText}
+        place='form'
+        isFormValid={isFormValid}
+      />
     </form>
   );
 }

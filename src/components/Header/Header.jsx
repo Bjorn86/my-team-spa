@@ -10,7 +10,7 @@ function Header() {
   return (
     <header className='header'>
       <div className='header__wrapper'>
-        <Button buttonText={'Выход'} place='home' />
+        <Button type='button' buttonText='Выход' place='home' />
         <SectionTitle titleText='Наша команда' />
         <p className='header__text'>
           Это опытные специалисты, хорошо разбирающиеся во&nbsp;всех задачах,
