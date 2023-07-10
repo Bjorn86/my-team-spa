@@ -1,0 +1,15 @@
+.card-list {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 48px 80px 69px;
+  box-sizing: border-box;
+  background-color: $white;
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 305px);
+    gap: 20px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+}

@@ -1,0 +1,31 @@
+.card {
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+  background-color: $white;
+  box-shadow: 0px 1px 4px 0 $gray-shadow;
+  &__link {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    transition: $opacity;
+  }
+  &__img {
+    width: 124px;
+    height: 124px;
+    margin-top: 16px auto 0;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  &__title {
+    margin: 16px 0;
+    @include base-text($textL, $black);
+    text-align: center;
+  }
+}

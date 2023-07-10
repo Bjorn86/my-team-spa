@@ -5,10 +5,10 @@ import { Outlet } from 'react-router-dom';
 import Header from '../Header/Header.jsx';
 
 // APP LAYOUT COMPONENT
-function AppLayout() {
+function AppLayout({ onLogout }) {
   return (
     <>
-      <Header />
+      <Header onLogout={onLogout} />
       <Outlet />
     </>
   );

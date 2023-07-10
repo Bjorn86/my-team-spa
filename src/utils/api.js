@@ -26,7 +26,7 @@ export function logout() {
 }
 
 // GET USER INFO
-export function getUserInfo({ userId }) {
+export function getUserInfo(userId) {
   return makeRequest(API_URL, `/users/${userId}`, 'GET');
 }
 
@@ -42,16 +42,7 @@ export function updateUserAvatar({ userId, avatar }) {
   });
 }
 
-// PUT LIKE
-export function puLike({ cardId, userData }) {
-  return makeRequest(API_URL, `/likes/${cardId}`, 'PUT', {
-    userData,
-  });
-}
-
-// DELETE LIKE
-export function deleteLike({ cardId, userData }) {
-  return makeRequest(API_URL, `/likes/${cardId}`, 'DELETE', {
-    userData,
-  });
+// CHANGE LIKE STATUS
+export function changeLikeStatus(cardId) {
+  return makeRequest(API_URL, `/users/${cardId}/likes`, 'PUT');
 }

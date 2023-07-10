@@ -8,6 +8,7 @@ function Button({
   buttonText,
   place,
   isShown,
+  isLiked,
   isFormValid,
   onClick,
 }) {
@@ -15,7 +16,7 @@ function Button({
     <button
       className={`button button_place_${place} ${
         isShown ? 'button_action_shown-password' : ''
-      } hover-button`}
+      } ${isLiked ? 'button_action_liked' : ''} hover-button`}
       type={type}
       aria-label={ariaLabel ? ariaLabel : null}
       disabled={place === 'form' && !isFormValid ? true : false}

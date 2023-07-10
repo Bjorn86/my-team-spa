@@ -6,11 +6,16 @@ import Button from '../Button/Button.jsx';
 import SectionTitle from '../SectionTitle/SectionTitle.jsx';
 
 // HEADER COMPONENT
-function Header() {
+function Header({ onLogout }) {
   return (
     <header className='header'>
       <div className='header__wrapper'>
-        <Button type='button' buttonText='Выход' place='home' />
+        <Button
+          type='button'
+          buttonText='Выход'
+          place='home'
+          onClick={onLogout}
+        />
         <SectionTitle titleText='Наша команда' />
         <p className='header__text'>
           Это опытные специалисты, хорошо разбирающиеся во&nbsp;всех задачах,

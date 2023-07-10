@@ -31,8 +31,22 @@
         no-repeat,
       transparent;
   }
+  &_place_card {
+    width: 30px;
+    height: 28px;
+    border: none;
+    border-radius: 4px;
+    align-self: flex-end;
+    background: url('../../assets/icons/like.svg') center center/14px no-repeat,
+      $gray-light;
+  }
   &_action_shown-password {
     background-image: url('../../assets/icons/eye.svg');
+  }
+  &_action_liked {
+    background: url('../../assets/icons/like-active.svg') center center/14px
+        no-repeat,
+      $gray-light;
   }
 }
 
