@@ -26,7 +26,8 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [isLoading, setLoading] = useState(false);
   const [isPreloaderActive, setPreloaderStatus] = useState(true);
-  const [cards, setCards] = useState([]);
+  const [initialCards, setInitialCards] = useState([]);
+  const [likedCards, setLikedCards] = useState([]);
   const navigate = useNavigate();
 
   // HANDLER USER REGISTRATION
@@ -101,11 +102,8 @@ function App() {
     try {
       const usersData = await api.getAllUsersInfo();
       if (usersData) {
-        /* setCards(usersData.data); */
-        const userCards = usersData.data.map((card) => {
-          return (card = { ...card, likes: [] });
-        });
-        localStorage.setItem('cards', JSON.stringify(userCards));
+        setInitialCards(usersData.data);
+        localStorage.setItem('cards', JSON.stringify(usersData.data));
       }
     } catch (err) {
       console.error(err);
@@ -117,11 +115,11 @@ function App() {
     try {
       const cardData = await api.changeLikeStatus(card.id);
       if (cardData) {
-        const userCards = cards.map((item) =>
-          item.id === card.id ? { ...card, likes: [currentUser.id] } : item,
+        setLikedCards([...likedCards, card]);
+        localStorage.setItem(
+          'likedCards',
+          JSON.stringify([...likedCards, card]),
         );
-        setCards(userCards);
-        localStorage.setItem('cards', JSON.stringify(userCards));
       }
     } catch (err) {
       console.error(err);
@@ -130,17 +128,20 @@ function App() {
 
   // HANDLER DELETE LIKE
   async function handleDeleteLike(card) {
+    const like = likedCards.find((item) => item.id === card.id);
     try {
       const cardData = await api.changeLikeStatus(card.id);
       if (cardData) {
-        const userCards = cards.map((item) =>
-          item.id === card.id ? { ...card, likes: [] } : item,
+        setLikedCards((state) => state.filter((item) => item.id !== like.id));
+        localStorage.setItem(
+          'likedCards',
+          JSON.stringify(likedCards.filter((item) => item.id !== like.id)),
         );
-        setCards(userCards);
-        localStorage.setItem('cards', JSON.stringify(userCards));
       }
     } catch (err) {
       console.error(err);
+    } finally {
+      console.log(likedCards);
     }
   }
 
@@ -151,9 +152,13 @@ function App() {
 
   // GET ALL USER INFO
   useEffect(() => {
-    if (loggedIn) {
+    if (loggedIn && !localStorage.getItem('cards')) {
       handleGetAllUsersInfo();
-      setCards(JSON.parse(localStorage.getItem('cards')));
+    } else if (loggedIn && localStorage.getItem('cards')) {
+      setInitialCards(JSON.parse(localStorage.getItem('cards')));
+      if (localStorage.getItem('likedCards')) {
+        setLikedCards(JSON.parse(localStorage.getItem('likedCards')));
+      }
     }
   }, [loggedIn]);
 
@@ -178,7 +183,8 @@ function App() {
                 index
                 element={
                   <Main
-                    cards={cards}
+                    cards={initialCards}
+                    likedCards={likedCards}
                     onLike={handlePutLike}
                     onDislike={handleDeleteLike}
                   />

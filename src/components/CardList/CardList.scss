@@ -7,9 +7,16 @@
   &__list {
     display: grid;
     grid-template-columns: repeat(auto-fit, 305px);
+    justify-content: space-evenly;
     gap: 20px;
     list-style: none;
     margin: 0;
     padding: 0;
+  }
+}
+
+@media screen and (max-width: 990px) {
+  .card-list {
+    padding: 32px 35px;
   }
 }

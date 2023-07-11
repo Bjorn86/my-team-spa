@@ -1,5 +1,4 @@
 // IMPORT PACKAGES
-import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 // IMPORT STYLES
@@ -8,17 +7,8 @@ import './Card.scss';
 // IMPORT COMPONENTS
 import Button from '../Button/Button.jsx';
 
-// IMPORT CONTEXT
-import { CurrentUserContext } from '../../contexts/CurrentUserContext.jsx';
-
 // CARD COMPONENT
-function Card({ card, onLike, onDislike }) {
-  // HOOKS
-  const currentUser = useContext(CurrentUserContext);
-
-  // OTHER VARIABLES
-  const isLiked = card.likes.some((item) => item === currentUser.id);
-
+function Card({ card, isLiked, onLike, onDislike }) {
   // HANDLER LIKE
   function handleLike() {
     onLike(card);
@@ -45,7 +35,7 @@ function Card({ card, onLike, onDislike }) {
       <Button
         type='button'
         ariaLabel={isLiked ? 'Убрать лайк' : 'Поставить лайк'}
-        place={'card'}
+        place='card'
         isLiked={isLiked}
         onClick={isLiked ? handleDislike : handleLike}
       />

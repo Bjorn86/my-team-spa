@@ -34,11 +34,24 @@
   &_place_card {
     width: 30px;
     height: 28px;
+    padding: 0;
     border: none;
     border-radius: 4px;
     align-self: flex-end;
-    background: url('../../assets/icons/like.svg') center center/14px no-repeat,
+    background: url('../../assets/icons/like.svg') center center/15px no-repeat,
       $gray-light;
+  }
+  &_place_card-list {
+    width: 170px;
+    height: 40px;
+    display: block;
+    margin: 54px auto 0;
+    border: 1px solid $black;
+    color: $black;
+    text-align: left;
+    background: url('../../assets/icons/shevron-down.svg') 132px center/18px
+        no-repeat,
+      $white;
   }
   &_action_shown-password {
     background-image: url('../../assets/icons/eye.svg');
@@ -61,6 +74,9 @@
       background: url('../../assets/icons/exit.svg') center center/18px
         no-repeat;
       font-size: 0;
+    }
+    &_place_card-list {
+      margin-top: 28px;
     }
   }
 }
