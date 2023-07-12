@@ -1,6 +1,7 @@
 // IMPORT PACKAGES
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { Navigate } from 'react-router-dom';
 import isEmail from 'validator/es/lib/isEmail';
 
 // IMPORT STYLES
@@ -11,7 +12,7 @@ import AuthScreen from '../AuthScreen/AuthScreen.jsx';
 import Button from '../Button/Button.jsx';
 
 // REGISTRATION COMPONENT
-function Registration({ onRegistration, onLoading }) {
+function Registration({ onRegistration, onLoading, loggedIn }) {
   // HOOKS
   const [isPasswordShown, setPasswordShown] = useState(false);
   const [isConfirmPasswordShown, setConfirmPasswordShown] = useState(false);
@@ -27,7 +28,6 @@ function Registration({ onRegistration, onLoading }) {
   // HANDLER SUBMIT
   function onSubmit(data) {
     onRegistration(data);
-    console.log(data);
   }
 
   // HANDLER PASSWORD SHOWN CLICK
@@ -47,7 +47,9 @@ function Registration({ onRegistration, onLoading }) {
     }
   }, [password, trigger]);
 
-  return (
+  return loggedIn ? (
+    <Navigate to='/' replace />
+  ) : (
     <main className='registration'>
       <AuthScreen
         authTitle='Регистрация'

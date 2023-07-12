@@ -1,23 +1,24 @@
 {
-  "name": "app-webpack-react",
+  "name": "testing-antipoff-group",
   "version": "1.0.1",
-  "description": "",
-  "private": "true",
+  "description": "Тестовое задание Antipoff Group",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack --mode development",
     "build": "cross-env NODE_ENV=production webpack --mode production",
-    "start": "cross-env NODE_ENV=development webpack-dev-server --mode development"
+    "start": "cross-env NODE_ENV=development webpack-dev-server --mode development",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Bjorn86/app-webpack-react.git"
+    "url": "git+https://github.com/Bjorn86/testing-antipoff-group.git"
   },
   "author": "Danila Legkobytov <legkobytov-danila@yandex.ru>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Bjorn86/app-webpack-react/issues"
+    "url": "https://github.com/Bjorn86/testing-antipoff-group/issues"
   },
-  "homepage": "https://github.com/Bjorn86/app-webpack-react#readme",
+  "homepage": "https://bjorn86.github.io/testing-antipoff-group/",
   "devDependencies": {
     "@babel/core": "^7.21.3",
     "@babel/preset-env": "^7.20.2",
@@ -32,6 +33,7 @@
     "csv-loader": "^3.0.5",
     "eslint": "^8.37.0",
     "eslint-config-react-app": "^7.0.1",
+    "gh-pages": "^5.0.0",
     "html-webpack-plugin": "^5.5.0",
     "mini-css-extract-plugin": "^2.7.4",
     "papaparse": "^5.4.0",

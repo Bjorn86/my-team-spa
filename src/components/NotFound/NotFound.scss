@@ -1,0 +1,26 @@
+.not-found {
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 246px 10px 60px;
+  box-sizing: border-box;
+  background-color: $white;
+  &__title {
+    margin-top: 0;
+    margin-bottom: 5px;
+    @include base-text($textXXXL, $black);
+    text-align: center;
+  }
+  &__text {
+    margin-top: 0;
+    margin-bottom: 40px;
+    @include base-text($textL, $black);
+    text-align: center;
+  }
+  &__link {
+    display: block;
+    @include base-text($textM, $red);
+    text-decoration: none;
+    text-align: center;
+    transition: $opacity;
+  }
+}

@@ -6,11 +6,12 @@ import { Route, Routes, useNavigate } from 'react-router-dom';
 import './App.scss';
 
 // IMPORT COMPONENTS
-import AppLayout from '../AppLayout/AppLayout.jsx';
+import HomePage from '../HomePage/HomePage.jsx';
 import Registration from '../Registration/Registration.jsx';
 import Login from '../Login/Login.jsx';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute.jsx';
-import Main from '../Main/Main.jsx';
+import DetailPage from '../DetailPage/DetailPage.jsx';
+import EditAvatarPopup from '../EditAvatarPopup/EditAvatarPopup.jsx';
 import Preloader from '../Preloader/Preloader.jsx';
 
 // IMPORT CONTEXT
@@ -25,6 +26,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
   const [isLoading, setLoading] = useState(false);
+  const [isEditAvatarPopupOpen, setEditAvatarPopupStatus] = useState(false);
   const [isPreloaderActive, setPreloaderStatus] = useState(true);
   const [initialCards, setInitialCards] = useState([]);
   const [likedCards, setLikedCards] = useState([]);
@@ -140,9 +142,33 @@ function App() {
       }
     } catch (err) {
       console.error(err);
-    } finally {
-      console.log(likedCards);
     }
+  }
+
+  // HANDLER EDIT AVATAR
+  async function handleEditAvatar({ url }) {
+    setLoading(true);
+    try {
+      const cardData = await api.updateUserAvatar({ url });
+      if (cardData) {
+        setCurrentUser({ ...currentUser, avatar: url });
+        closeAllPopups();
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  // HANDLE EDIT AVATAR CLICK
+  function handleEditAvatarClick() {
+    setEditAvatarPopupStatus(true);
+  }
+
+  // HANDLE CLOSE ALL POPUPS
+  function closeAllPopups() {
+    setEditAvatarPopupStatus(false);
   }
 
   // CHECK USER LOGGED IN
@@ -173,30 +199,35 @@ function App() {
               path='/'
               element={
                 <ProtectedRoute
-                  element={AppLayout}
+                  element={HomePage}
                   loggedIn={loggedIn}
+                  cards={initialCards}
+                  likedCards={likedCards}
+                  onLike={handlePutLike}
+                  onDislike={handleDeleteLike}
                   onLogout={handleUserLogOut}
                 />
               }
-            >
-              <Route
-                index
-                element={
-                  <Main
-                    cards={initialCards}
-                    likedCards={likedCards}
-                    onLike={handlePutLike}
-                    onDislike={handleDeleteLike}
-                  />
-                }
-              />
-            </Route>
+            ></Route>
+            <Route
+              path=':userId'
+              element={
+                <ProtectedRoute
+                  element={DetailPage}
+                  loggedIn={loggedIn}
+                  cards={initialCards}
+                  onLogout={handleUserLogOut}
+                  onEditAvatar={handleEditAvatarClick}
+                />
+              }
+            />
             <Route
               path='/signup'
               element={
                 <Registration
                   onRegistration={handleUserRegistration}
                   onLoading={isLoading}
+                  loggedIn={loggedIn}
                 />
               }
             />
@@ -206,10 +237,17 @@ function App() {
                 <Login
                   onLogin={handleUserAuthorization}
                   onLoading={isLoading}
+                  loggedIn={loggedIn}
                 />
               }
             />
           </Routes>
+          <EditAvatarPopup
+            onEditAvatar={handleEditAvatar}
+            onLoading={isLoading}
+            isOpen={isEditAvatarPopupOpen}
+            onClose={closeAllPopups}
+          />
         </CurrentUserContext.Provider>
       )}
     </div>

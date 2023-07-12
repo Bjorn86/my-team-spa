@@ -8,9 +8,6 @@ import './CardList.scss';
 import Button from '../Button/Button.jsx';
 import Card from '../Card/Card.jsx';
 
-/* // IMPORT CONFIGS
-import { CARDS_PARAMS_RENDER } from '../../utils/config'; */
-
 // CARD LIST COMPONENT
 function CardList({ cards, likedCards, cardsRenderParams, onLike, onDislike }) {
   // HOOKS

@@ -21,10 +21,7 @@ function Card({ card, isLiked, onLike, onDislike }) {
 
   return (
     <li className='card'>
-      <Link
-        to={`${card.first_name.toLowerCase()}-${card.last_name.toLowerCase()}`}
-        className='card__link hover-link'
-      >
+      <Link to={`${card.id}`} className='card__link hover-link'>
         <img
           className='card__img'
           src={card.avatar}

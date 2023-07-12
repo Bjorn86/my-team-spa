@@ -9,6 +9,41 @@
     border: 1px solid $gray-light;
     background-color: transparent;
   }
+  &_place_detail-page-back {
+    border: 1px solid $gray-light;
+    background-color: transparent;
+  }
+  &_place_detail-page-exit {
+    margin-left: auto;
+    border: 1px solid $gray-light;
+    background-color: transparent;
+  }
+  &_place_avatar {
+    position: relative;
+    width: 187px;
+    height: 187px;
+    padding: 0;
+    border-radius: 50%;
+    border: none;
+    overflow: hidden;
+    &::before {
+      content: '';
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: url('../../assets/icons/avatar-edit.svg') center center/auto
+          no-repeat,
+        $black;
+      opacity: 0;
+      transition: $opacity;
+    }
+    &:hover::before {
+      opacity: 0.8;
+    }
+  }
   &_place_form {
     height: 48px;
     margin-top: 6px;
@@ -53,6 +88,17 @@
         no-repeat,
       $white;
   }
+  &_place_popup {
+    min-width: 32px;
+    min-height: 32px;
+    top: -40px;
+    right: -40px;
+    position: absolute;
+    padding: 0;
+    border: none;
+    background: url('../../assets/icons/close-icon.svg') center center/contain
+      no-repeat;
+  }
   &_action_shown-password {
     background-image: url('../../assets/icons/eye.svg');
   }
@@ -75,8 +121,33 @@
         no-repeat;
       font-size: 0;
     }
+    &_place_detail-page-back {
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      border: none;
+      background: url('../../assets/icons/shevron-left.svg') center center/8px
+        no-repeat;
+      font-size: 0;
+    }
+    &_place_detail-page-exit {
+      width: 40px;
+      height: 40px;
+      margin-left: 0;
+      padding: 0;
+      border: none;
+      background: url('../../assets/icons/exit.svg') center center/18px
+        no-repeat;
+      font-size: 0;
+    }
     &_place_card-list {
       margin-top: 28px;
+    }
+    &_place_popup {
+      min-width: 20px;
+      min-height: 20px;
+      top: -36px;
+      right: 0;
     }
   }
 }

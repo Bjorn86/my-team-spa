@@ -1,6 +1,7 @@
 // IMPORT PACKAGES
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { Navigate } from 'react-router-dom';
 import isEmail from 'validator/es/lib/isEmail';
 
 // IMPORT STYLES
@@ -11,7 +12,7 @@ import AuthScreen from '../AuthScreen/AuthScreen.jsx';
 import Button from '../Button/Button.jsx';
 
 // LOGIN COMPONENT
-function Login({ onLogin, onLoading }) {
+function Login({ onLogin, onLoading, loggedIn }) {
   // HOOKS
   const [isPasswordShown, setPasswordShown] = useState(false);
   const {
@@ -23,7 +24,6 @@ function Login({ onLogin, onLoading }) {
   // HANDLER SUBMIT
   function onSubmit(data) {
     onLogin(data);
-    console.log(data);
   }
 
   // HANDLER PASSWORD SHOWN CLICK
@@ -31,7 +31,9 @@ function Login({ onLogin, onLoading }) {
     setPasswordShown(!isPasswordShown);
   }
 
-  return (
+  return loggedIn ? (
+    <Navigate to='/' replace />
+  ) : (
     <main className='login'>
       <AuthScreen
         authTitle='Вход'

@@ -36,9 +36,9 @@ export function getAllUsersInfo() {
 }
 
 // UPDATE USER AVATAR
-export function updateUserAvatar({ userId, avatar }) {
-  return makeRequest(API_URL, `/users/${userId}`, 'PATCH', {
-    avatar,
+export function updateUserAvatar({ url }) {
+  return makeRequest(API_URL, `/users/me`, 'PATCH', {
+    url,
   });
 }
 

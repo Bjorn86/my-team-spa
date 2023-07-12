@@ -1,0 +1,72 @@
+.detail-page {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 49px 188px;
+  box-sizing: border-box;
+  background-color: $white;
+  &__info-wrapper {
+    display: flex;
+    gap: 129px;
+  }
+  &__text-wrapper {
+    max-width: 630px;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+  &__text {
+    margin: 0;
+    @include base-text($textM, $black);
+    line-height: 1.36;
+  }
+  &__contacts-wrapper {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    list-style: none;
+  }
+  &__contacts-item {
+    padding-left: 32px;
+    &_type_telephone {
+      background: url('../../assets/icons/tel.svg') left center/22px no-repeat;
+    }
+    &_type_email {
+      background: url('../../assets/icons/mail.svg') left 4px/23px no-repeat;
+    }
+  }
+  &__link {
+    @include base-text($textM, $black);
+    line-height: 1.36;
+    text-decoration: none;
+    transition: $opacity;
+  }
+}
+
+@media screen and (max-width: 1170px) {
+  .detail-page {
+    padding-right: 80px;
+    padding-left: 80px;
+  }
+}
+
+@media screen and (max-width: 990px) {
+  .detail-page {
+    padding: 32px 35px;
+    &__info-wrapper {
+      flex-direction: column-reverse;
+      gap: 34px;
+    }
+    &__text-wrapper {
+      max-width: 100%;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .detail-page {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+}
